@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preaprobaciones</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="login-container" style="display: block;">
+        <h2>Iniciar Sesión</h2>
+        <form id="login-form">
+            <div>
+                <label for="username">Usuario:</label>
+                <input type="text" id="username" required>
+            </div>
+            <div style="padding-top: 10px;">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Ingresar</button>
+        </form>
+    </div>
+
+    <div id="app-container" style="display: none;">
+        <button id="logout-btn" style="position: absolute; top: 10px; right: 10px;">Cerrar Sesión</button>
+
+    <div class="tipo-credito">
+        <label for="tipo_producto">Tipo de Crédito:</label>
+        <select id="tipo_producto">
+            <option></option>
+            <option>Vehicular</option>
+            <option>Consumo</option>
+            <option>Microcrédito</option>
+            <option>Inmobiliario</option>
+        </select>
+    </div>
+    <div class="contenedor">
+        <div class="item">
+            <label for="monto">Monto a Financiar:</label >
+            <input type="number" id="monto" placeholder="Monto a financiar" min="0" oninput="this.value = Math.round(this.value);" required>
+        </div>
+        <div class="item">
+            <label for="ingresoDeudor">Ingreso del Deudor:</label>
+            <input type="number" id="ingresoDeudor" placeholder="Ingreso mensual del deudor" min="0" oninput="this.value = Math.round(this.value);" required>
+        </div>
+        <div class="plazo">
+            <label for="plazo">Plazo:</label>
+            <select id="plazo">
+                <option></option>
+                <option>12</option>
+                <option>24</option>
+                <option>36</option>
+                <option>48</option>
+                <option>60</option>
+                <option>72</option>
+            </select>
+        </div>
+        <div class="item">
+            <label for="ingresoConyuge">Ingreso del Cónyuge:</label>
+            <input type="number" id="ingresoConyuge" placeholder="Ingreso mensual del cónyuge" min="0" oninput="this.value = Math.round(this.value);">
+        </div>
+        <div class="item">
+            <label for="cedulaDeudor">Cédula Deudor:</label>
+            <input type="text" id="cedulaDeudor" placeholder="Ingrese la cédula" min="10"  max="10" required>
+        </div>
+        <div class="item">
+            <label for="otrosIngresos">Otros Ingresos:</label>
+            <input type="number" id="otrosIngresos" placeholder="Otros ingresos" min="0" oninput="this.value = Math.round(this.value);">
+        </div>
+        <div class="estado_civil">
+            <label for="estado_civil">Estado Civil:</label>
+            <select id="estado_civil">
+                <option></option>
+                <option>Soltera/o</option>
+                <option>Casada/o</option>
+                <option>Divorciada/o</option>
+                <option>Unión Libre</option>
+            </select>
+        </div>
+        <div class="item">
+            <label for="numerohijos">Número de hijos</label>
+            <input type="number" id="numerohijos" placeholder="Detalle el número de hijos" oninput="this.value = Math.round(this.value);"required>
+        </div>
+        <div class="checkbox">
+            <label for="separacion">Separación de bienes</label>
+            <input type="radio" id="separacion" name="separacion">Si
+            <input type="radio" id="separacion" name="separacion">No
+        </div>
+        <div class="item">
+            <label for="gastosFamiliaresTotales">Gastos Familiares Totales:</label>
+            <input  style="color:grey;" type="text" id="gastosFamiliaresTotales" name="gastosFamiliaresTotales" readonly>
+            </div>
+        <div class="item">
+            <label for="cedulaConyuge">Cédula Cónyuge:</label>
+            <input type="text" id="cedulaConyuge" placeholder="Ingrese la cédula" min="10" max="10">
+        </div>
+        <div class="item">
+            <label for="gastosFinancierosDeudor">Gastos Financieros del Deudor:</label>
+            <input style="color:grey;" type="number" id="gastosFinancierosDeudor" min="0" oninput="this.value = Math.round(this.value);" required readonly>
+        </div>
+        <div class="item">
+            <label for="Activos">Activos (Casa/Terreno/Vehículo)</label>
+            <input type="number" id="Activos" placeholder="Detalle valor de sus activos" min="0" oninput="this.value = Math.round(this.value);" required>
+        </div>
+        <div class="item">
+            <label for="gastosFinancierosConyuge">Gastos Financieros del Cónyuge:</label>
+            <input style="color:grey;" type="number" id="gastosFinancierosConyuge"  oninput="this.value = Math.round(this.value);" min="0" required readonly>
+        </div>
+        <div class="checkbox">
+            <input id="terminos" type="checkbox" required>
+            <a href="https://tactiqaec.com/terminos_condiciones.html" target="_blank">Acepto términos y condiciones</a>
+        </div>
+        <div></div>
+        <div>
+            <div class="checkbox">
+                <input id="funcion" type="checkbox" required>
+                <a href="https://procesosjudiciales.funcionjudicial.gob.ec/busqueda-filtros", target="_blank">Validación páginas de restricción</a>
+            </div>
+        </div>
+        <div class="item" style="grid-column: span 2; text-align: center;">
+            <button id="calcularBtn" type="button">Calcular Preaprobación</button>
+        </div>
+    </div>
+    <div id="resultados"></div>
+    <div style="border-style: solid; border-color: lightgrey; border-radius: 25px; padding: 1em;" id="decision"></div>
+    <script src="main.js"></script>
+    <script src="login.js"></script>
+    <div class="loader" style="display: none;"></div></div>
+    </div>
+</body>
+</html>
